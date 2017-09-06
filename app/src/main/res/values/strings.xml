@@ -11,4 +11,14 @@
     <string name="login2">Login</string>
     <string name="signup2">SignUp</string>
     <string name="welcome2">Welcome</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up2">Sign Up!</string>
+    <string name="title_activity_choice">Choice</string>
+    <string name="carpenter">CARPENTER</string>
+    <string name="choose_the_required_service">Choose the required service</string>
+    <string name="electrician">ELECTRICIAN</string>
+    <string name="painters">PAINTERS</string>
+    <string name="photographer">PHOTOGRAPHER</string>
+    <string name="plumber">Plumber</string>
 </resources>
