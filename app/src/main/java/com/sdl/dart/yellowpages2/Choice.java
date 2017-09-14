@@ -20,7 +20,7 @@ public class Choice extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Floating action button features not yet defined", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

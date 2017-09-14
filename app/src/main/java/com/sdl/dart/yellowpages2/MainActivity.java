@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,12 +22,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
+import static android.R.attr.data;
+
 public class MainActivity extends AppCompatActivity {
     public static final String CHECK = "com.sdl.dart.yellowpages2.DatabaseHandler";
     Button btnAddUser, btnLogin, btnfgp;
     DatabaseHandler db;
     private String TAG = "UserInfo";
-
+user u=new user();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });*/
+        });final EditText edit =  (EditText) findViewById(R.id.editText3);
+        edit.getText().toString();*/
         db = new DatabaseHandler(this);
 
         btnAddUser = (Button) findViewById(R.id.button6);
@@ -63,10 +67,17 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(v.getContext(),Choice.class);
             EditText editText = (EditText) findViewById(R.id.editText3);
             EditText editText2 = (EditText) findViewById(R.id.editText4);
-            String message = editText.getText().toString();
-            String message2 = editText2.getText().toString();
-            intent.putExtra(message,message2);
-startActivity(intent);
+            u.setU_name(editText.getText().toString());
+            u.setPass(editText2.getText().toString());
+            if(db.searchUser(u))
+
+            //intent.putExtra(message,message2);
+            startActivity(intent);
+            else
+            {
+                Toast.makeText(MainActivity.this, "Invalid Credentials!",
+                        Toast.LENGTH_LONG).show();
+            }
 
 
 

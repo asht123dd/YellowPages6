@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +22,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
     // All Static variables
     // Database Version
+    FeedReaderContract f=new FeedReaderContract();
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
@@ -76,6 +82,49 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_USER_DETAIL, null, values);
         db.close(); // Closing database connection
+    }
+    /*private Connection connect() {
+        // SQLite connection string
+        String url = "jdbc:sqlite:mydatabase.db";
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return conn;
+    }*/
+
+    boolean searchUser(user newUser){
+        SQLiteDatabase db =this.getWritableDatabase();
+        String sql=("Select * from "+TABLE_USER_DETAIL+" where "+U_NAME+"='"+newUser.getU_name()+"';");
+        Cursor cursor=db.rawQuery(sql,null);
+     /*   Connection conn = this.connect();
+        Statement stmt  = conn.createStatement();
+        ResultSet rs    = stmt.executeQuery(sql))*/
+        if(cursor==null)
+        {
+            return false;
+        }
+        else
+            return true;/*
+        try (Connection connect = ConnectionHelper(user,password,database,server);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            if(rs.next())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }*/
     }
 
 
