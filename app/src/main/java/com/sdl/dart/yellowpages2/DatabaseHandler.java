@@ -22,7 +22,7 @@ import java.util.List;
 public class DatabaseHandler extends SQLiteOpenHelper {
     // All Static variables
     // Database Version
-    FeedReaderContract f=new FeedReaderContract();
+    //FeedReaderContract f=new FeedReaderContract();
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
@@ -102,12 +102,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      /*   Connection conn = this.connect();
         Statement stmt  = conn.createStatement();
         ResultSet rs    = stmt.executeQuery(sql))*/
-        if(cursor==null)
+        if(cursor.moveToFirst())
         {
-            return false;
+            return true;
         }
         else
-            return true;/*
+            return false;/*
         try (Connection connect = ConnectionHelper(user,password,database,server);
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
@@ -124,8 +124,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
-        }*/
-    }
+        }*/}
+        public List<user> getAllUsersList() {
+
+
+            List<user> userList = new ArrayList<user>();
+
+            // Select All Query
+            String selectQuery = "SELECT  * FROM " + TABLE_USER_DETAIL;
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            Cursor cursor = db.rawQuery(selectQuery, null);
+
+            // looping through all rows and adding to list
+            if (cursor.moveToFirst()) {
+                do {
+
+                    user usr = new user();
+                    //usr.set_id(Integer.parseInt(cursor.getString(0)));
+                    //stdnt.set_enroll_no(Integer.parseInt(cursor.getString(1)));
+                    usr.setU_name(cursor.getString(2));
+                    usr.setPass(cursor.getString(3));
+
+                    // Adding contact to list
+                    userList.add(usr);
+
+                } while (cursor.moveToNext());
+            }
+
+            // return contact list
+            return userList;
+        }
+
 
 
 
